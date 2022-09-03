@@ -887,7 +887,7 @@ static unsigned char aw8697_haptic_set_level(struct aw8697 *aw8697, int gain)
 {
     int val = 80;
 
-    val = aw8697->level * gain / 3;
+    val = aw8697->level * gain / 5;
     if (val > 255)
         val = 255;
 
@@ -3372,7 +3372,7 @@ static int aw8697_haptic_init(struct aw8697 *aw8697)
     }
     aw8697_haptic_set_repeat_wav_seq(aw8697, 10);
 
-    aw8697->level = 3;
+    aw8697->level = 5;
 
     /*For haptic test 90mA in AT end*/
     ret = aw8697_i2c_read(aw8697, AW8697_REG_WAVSEQ1, &reg_val);
@@ -3890,7 +3890,7 @@ static ssize_t aw8697_level_store(struct device *dev,
         return rc;
 
     if (val < 0 || val > 10)
-        val = 3;
+        val = 5;
 
     pr_info("%s: value=%d\n", __FUNCTION__, val);
     mutex_lock(&aw8697->lock);
