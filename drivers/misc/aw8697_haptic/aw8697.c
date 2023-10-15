@@ -5113,7 +5113,7 @@ static unsigned char aw8697_haptic_set_level(struct aw8697 *aw8697, int gain)
 {
     int val = 80;
 
-    val = aw8697->level * gain / 3;
+    val = aw8697->level * gain / 5;
     if (val > 255)
         val = 255;
 
@@ -8000,7 +8000,7 @@ static int aw8697_haptic_init(struct aw8697 *aw8697)
     /* haptic audio */
     aw8697->haptic_audio.delay_val = 1;
     aw8697->haptic_audio.timer_val = 21318;
-    aw8697->level = 3;
+    aw8697->level = 5;
     INIT_LIST_HEAD(&(aw8697->haptic_audio.ctr_list));
 
     hrtimer_init(&aw8697->haptic_audio.timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL);
@@ -8721,7 +8721,7 @@ static ssize_t aw8697_level_store(struct device *dev,
         return rc;
 
     if (val < 0 || val > 10)
-        val = 3;
+        val = 5;
 
     pr_info("%s: value=%d\n", __FUNCTION__, val);
     mutex_lock(&aw8697->lock);
